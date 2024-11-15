@@ -22,13 +22,15 @@ npm install
 
     + 1 cái chạy:
 
-            ```
+           
             npm run dev
-            ```
+      
+      
     + 1 cái chạy:
 
-            ```
+      
             php artisan serve
-            ```
+      
+
 
             
