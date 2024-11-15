@@ -1,0 +1,353 @@
+// Base Styles
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-primary;
+  background-color: $bg-color;
+  color: $text-color;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Header 
+.header {
+  width: 100%;
+  background-color: $accent-color;
+  padding: 15px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  .navbar {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      color: $text-color;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .auth-buttons {
+      a {
+        margin-left: 10px;
+        color: $button-text;
+        background-color: $button-bg;
+        padding: 8px 15px;
+        border-radius: $border-radius;
+        transition: all 0.3s;
+
+        &:hover {
+          background-color: $button-hover;
+          color: $bg-color;
+        }
+      }
+    }
+  }
+}
+
+// Main Content 
+.main-content {
+  flex-grow: 1; 
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+  padding: 40px 20px;
+  background-color: lighten($accent-color, 20%);
+  border-radius: $border-radius;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+
+  .anime-image {
+    position: relative;
+    width: 100%;
+    height: 300px; 
+    overflow: hidden;
+    margin-bottom: 40px;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: auto;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      border-radius: $border-radius;
+    }
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    b{
+      color: $accent-hover;
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+  }
+
+  .explore-button {
+    display: inline-block;
+    color: $button-text;
+    background-color: $accent-color;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: $border-radius;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: $accent-hover;
+      color: $bg-color;
+    }
+  }
+}
+
+// Footer 
+footer {
+  width: 100%;
+  background-color: darken($bg-color, 10%);
+  padding: 15px 0;
+  text-align: center;
+  color: lighten($text-color, 10%);
+  font-size: 0.9rem;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+
+  a {
+    color: lighten($text-color, 10%);
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: $accent-hover;
+    }
+  }
+}
+
+
+// Form 
+
+.form-container {
+  .card {
+    background-color: lighten($bg-color, 5%);
+    border: none;
+    border-radius: $border-radius;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+    .card-header {
+      background-color: $accent-color;
+      color: $button-text;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-align: center;
+      border-radius: $border-radius $border-radius 0 0;
+      i{
+        color:$button-text;
+        font-size: 1.2rem;
+      }
+    }
+
+    .card-body {
+      padding: 30px;
+
+      label {
+        color: $text-color;
+        font-weight: 600;
+      }
+
+      .form-control {
+        border: 1px solid darken($bg-color, 10%);
+        border-radius: $border-radius;
+        transition: border-color 0.3s;
+
+        &:focus {
+          border-color: $accent-hover;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        &.is-invalid {
+          border-color: $accent-hover;
+
+          &:focus {
+            box-shadow: 0 0 5px rgba(224, 122, 159, 0.3);
+          }
+        }
+      }
+
+      .form-check-input {
+        accent-color: $accent-color;
+      }
+
+      .invalid-feedback {
+        color: $accent-hover;
+      }
+    }
+
+    .btn-primary {
+      background-color: $button-bg;
+      color: $button-text;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: $border-radius;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: $button-hover;
+      }
+    }
+
+    .btn-link {
+      color: $accent-color;
+      text-decoration: none;
+      font-weight: bold;
+
+      &:hover {
+        color: $accent-hover;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+
+//Music Cards
+
+.songs-list-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: $border-radius;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px; /* Đặt kích thước phù hợp */
+  margin: 20px auto;
+
+  .songs-list-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $text-color;
+      text-align: center;
+      margin-bottom: 1.5rem;
+  }
+
+  .songs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+  }
+
+  .music-card {
+      max-width: 100%;
+      background-color: $card-bg-color;
+      padding: 10px;
+  }
+}
+
+
+.music-card {
+  background-color: $card-bg-color;
+  border-radius: $border-radius;
+  box-shadow: 0 4px 8px $shadow-color;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+      background-color: $hover-bg-color;
+      transform: scale(1.02);
+  }
+
+  .music-card-body {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+
+      .music-card-image {
+          width: 80px;
+          height: 80px;
+          border-radius: $border-radius;
+          margin-right: 1rem;
+          object-fit: cover;
+          box-shadow: 0 4px 6px $shadow-color;
+      }
+
+      .music-card-content {
+          .music-card-title {
+              font-size: 1.2rem;
+              font-weight: bold;
+              color: $text-color;
+              margin: 0;
+          }
+
+          .music-card-artist {
+              font-size: 1rem;
+              color: $accent-color;
+              margin-top: 0.25rem;
+          }
+          .music-card-plays {
+            font-size: 0.9em;
+            color: #aaa;
+            margin-top: 5px;
+          }
+      }
+  }
+}
+
+//Music player
+.music-player {
+  max-width: 400px;
+  margin: 50px auto;
+  text-align: center;
+  background-color: #f4e1e6;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .album-art {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      transition: transform 0.5s linear;
+  }
+
+  .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+
+      button {
+          background-color: #f2a1b8;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 12px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:hover {
+              background-color: #e07a9f;
+          }
+      }
+  }
+
+  input[type="range"] {
+      width: 100%;
+      margin-top: 20px;
+  }
+}
+
