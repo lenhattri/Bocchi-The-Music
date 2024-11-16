@@ -9,9 +9,8 @@
 
 ```
 cp .env.example .env
-php artisan install
+composer install
 php artisan migrate
-php artisan config:cache
 ```
  - Cài npm
 ```
