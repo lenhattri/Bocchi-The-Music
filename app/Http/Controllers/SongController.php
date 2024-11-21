@@ -18,8 +18,9 @@ class SongController extends Controller
 
     public function create()
     {
+        $musicStyles = MusicStyle::all();
         $albums = Album::all();
-        return view('songs.create',compact('albums'));
+        return view('songs.create',compact('albums','musicStyles'));
     }
 
     public function store(Request $request)

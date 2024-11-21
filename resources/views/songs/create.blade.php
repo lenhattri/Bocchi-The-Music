@@ -29,8 +29,8 @@
         </div>
 
         <div class="form-group">
-            <label for="album">{{ __('Album') }}:</label>
-            <select name="album" id="album_id" class="form-control">
+            <label for="album_id">{{ __('Album') }}:</label>
+            <select name="album_id" id="album_id" class="form-control">
                 <option value="">{{ __('No Album') }}</option> 
                 @foreach ($albums as $album)
                     <option value="{{ $album->id }}" 
