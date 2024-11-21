@@ -27,7 +27,7 @@ class SongController extends Controller
     $request->validate([
         'title' => 'required',
         'artist' => 'required',
-        'album_id' => 'nullable|exists:albums,id', // Đảm bảo tên trường là album_id
+        'album_id' => 'nullable|exists:albums,id',
         'year' => 'required|integer',
         'image' => 'nullable|image',
         'music_file' => 'nullable|mimes:mp3',
@@ -96,7 +96,7 @@ class SongController extends Controller
     public function destroy(Song $song)
     {
         $song->delete();
-        return redirect()->route('songs.index')->with('success', 'Song deleted successfully.');
+        return redirect()->route('songs.index')->with('success', __('Song deleted successfully.'));
     }
 
 
