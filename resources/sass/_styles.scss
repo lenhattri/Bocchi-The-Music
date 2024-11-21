@@ -307,7 +307,7 @@ footer {
   }
 }
 
-//Music player
+/* Music player gốc */
 .music-player {
   max-width: 400px;
   margin: 50px auto;
@@ -350,6 +350,53 @@ footer {
       margin-top: 20px;
   }
 }
+
+/* Thêm mới cho thanh tua và thời lượng */
+.music-player {
+  /* Giữ nguyên các style cũ */
+
+  /* Thanh tua */
+  .seek-bar {
+    position: relative;
+    height: 5px; /* Chiều cao siêu nhỏ */
+    background-color: #f7e6eb; /* $card-bg-color */
+    border-radius: 12px;
+    margin: 10px 0;
+    cursor: pointer;
+
+    .seek-bar-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: #f2a1b8; /* $accent-color */
+      border-radius: 12px;
+      width: 0%; /* Sẽ được cập nhật qua JavaScript */
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -5px; /* Điều chỉnh để định vị chấm tròn */
+        right: 0;
+        width: 15px;
+        height: 15px;
+        background-color: #f2a1b8; /* $accent-color */
+        border-radius: 50%;
+        transform: translateX(50%);
+      }
+    }
+  }
+
+  /* Hiển thị thời lượng */
+  .duration {
+    font-size: 0.8rem;
+    color: #3d405b; /* $text-color */
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+  }
+}
+
 
 //dashboard
 
