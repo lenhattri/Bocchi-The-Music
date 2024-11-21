@@ -15,12 +15,21 @@ class Song extends Model
         'image',
         'music_file',
         'user_id',
+        'album_id',
         'plays', 
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function album()
+    {
+        return $this->belongsTo(Album::class);
+    }
+    public function musicStyle()
+    {
+    return $this->belongsTo(MusicStyle::class);
     }
 
 }

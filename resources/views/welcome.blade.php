@@ -35,7 +35,7 @@
     </div>
     <h1>Chào mừng đến với <b id="title-brand">Bocchi the Music</b></h1>
     <p>Khám phá giai điệu ngọt ngào, thư giãn và hòa mình vào thế giới âm nhạc nhẹ nhàng. Bắt đầu hành trình âm nhạc của bạn ngay hôm nay!</p>
-    <a href="#explore" class="btn explore-button">Khám Phá Ngay</a>
+    <a href="{{route('home')}}" class="btn explore-button">Khám Phá Ngay</a>
 </main>
 
 <footer>

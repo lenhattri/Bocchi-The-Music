@@ -30,9 +30,35 @@
 
         <div class="form-group">
             <label for="album">{{ __('Album') }}:</label>
-            <input type="text" name="album" id="album" class="form-control" value="{{ old('album', $song->album ?? '') }}">
+            <select name="album" id="album_id" class="form-control">
+                <option value="">{{ __('No Album') }}</option> 
+                @foreach ($albums as $album)
+                    <option value="{{ $album->id }}" 
+                        @if(isset($song))
+                            {{ old('album_id', $song->album_id ?? '') == $album->id ? 'selected' : '' }}
+                        @endif
+                        >
+                        {{ $album->album_name }}
+                    </option>
+                @endforeach
+            </select>
         </div>
-
+        <div class="form-group">
+            <label for="music_style_id">{{ __('Music Style') }}:</label>
+            <select name="music_style_id" id="music_style_id" class="form-control">
+                <option value="">{{ __('Free Style') }}</option>
+                @foreach ($musicStyles as $musicStyle)
+                    <option value="{{ $musicStyle->id }}"
+                        @if(isset($song) && old('music_style_id', $song->music_style_id ?? '') == $musicStyle->id)
+                            selected
+                        @endif
+                    >
+                        {{ $musicStyle->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        
         <div class="form-group">
             <label for="year">{{ __('Year') }}:</label>
             <input type="number" name="year" id="year" class="form-control" value="{{ old('year', $song->year ?? '') }}">

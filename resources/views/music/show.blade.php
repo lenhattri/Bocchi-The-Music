@@ -2,16 +2,33 @@
 
 @section('content')
 <div class="container">
+    <!-- Bài hát hiện tại -->
     <div class="music-player mt-4">
-        <img src="{{ asset($song->image) }}" alt="{{ $song->title }}" class="album-art">
-        <h3>{{ $song->title }}</h3>
-        <p>{{ $song->artist }}</p>
+        <img src="{{ asset($currentSong->image) }}" alt="{{ $currentSong->title }}" class="album-art">
+        <h3>{{ $currentSong->title }}</h3>
+        <p>{{ $currentSong->artist }}</p>
 
         <div class="controls">
             <button id="play-pause"><i class="fa-solid fa-play"></i></button>
         </div>
         <input type="range" id="seek-bar" value="0" step="1">
-        <audio id="audio" src="{{ asset($song->music_file) }}"></audio>
+        <audio id="audio" src="{{ asset($currentSong->music_file) }}"></audio>
+    </div>
+
+    <!-- Gợi ý bài hát -->
+    <div class="suggested-songs mt-5">
+        <h4>You might also like</h4>
+        <div class="suggested-list">
+            @foreach($topSongs as $entry)
+            <div class="suggested-song">
+                <img src="{{ asset($entry['song']->image) }}" alt="{{ $entry['song']->title }}" class="suggested-album-art">
+                <div class="suggested-info">
+                    <h5>{{ $entry['song']->title }}</h5>
+                    <p>{{ $entry['song']->artist }}</p>
+                </div>
+            </div>
+            @endforeach
+        </div>
     </div>
 </div>
 
@@ -62,4 +79,3 @@
     });
 </script>
 @endsection
-    
