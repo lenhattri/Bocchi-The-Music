@@ -17,7 +17,7 @@
 
     <!-- Gợi ý bài hát -->
     <div class="suggested-songs mt-5">
-        <h4>You might also like</h4>
+        <h4>{{ __('You might also like') }}</h4>
         <div class="suggested-list">
             @foreach($topSongs as $entry)
             <div class="suggested-song">

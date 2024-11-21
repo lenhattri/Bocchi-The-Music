@@ -26,7 +26,7 @@
 
             <!-- Danh sách bài hát -->
             <div class="songs-list-container">
-                <h2 class="songs-list-title">Danh sách bài hát</h2>
+                <h2 class="songs-list-title">{{ __('Song List') }}</h2>
                 
                 <!-- Danh sách bài hát -->
                 <div class="songs-list">
@@ -36,8 +36,8 @@
                                 <img src="{{ asset($song->image) }}" alt="{{ $song->title }}" class="music-card-image">
                                 <div class="music-card-content">
                                     <h5 class="music-card-title">{{ $song->title }}</h5>
-                                    <p class="music-card-artist">{{ $song->artist }}</p>
-                                    <p class="music-card-plays">Lượt nghe: {{ $song->plays }}</p>
+                                    <p class="music-card-artist">{{ __('Artist') }}: {{ $song->artist }}</p>
+                                    <p class="music-card-plays">{{ __('Plays') }}: {{ $song->plays }}</p>
                                 </div>
                             </div>
                         </a>
