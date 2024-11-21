@@ -14,6 +14,7 @@ class Song extends Model
         'year',
         'image',
         'music_file',
+        'music_style_id',
         'user_id',
         'album_id',
         'plays', 

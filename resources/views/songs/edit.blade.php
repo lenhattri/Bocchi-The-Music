@@ -29,35 +29,30 @@
         </div>
 
         <div class="form-group">
-            <label for="album">{{ __('Album') }}:</label>
-            <select name="album" id="album_id" class="form-control">
-                <option value="">{{ __('No Album') }}</option> 
-                @foreach ($albums as $album)
-                    <option value="{{ $album->id }}" 
-                        @if(isset($song))
-                            {{ old('album_id', $song->album_id ?? '') == $album->id ? 'selected' : '' }}
-                        @endif
-                        >
-                        {{ $album->album_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="music_style_id">{{ __('Music Style') }}:</label>
-            <select name="music_style_id" id="music_style_id" class="form-control">
-                <option value="">{{ __('Free Style') }}</option>
-                @foreach ($musicStyles as $musicStyle)
-                    <option value="{{ $musicStyle->id }}"
-                        @if(isset($song) && old('music_style_id', $song->music_style_id ?? '') == $musicStyle->id)
-                            selected
-                        @endif
-                    >
-                        {{ $musicStyle->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+    <label for="album_id">{{ __('Album') }}:</label>
+    <select name="album_id" id="album_id" class="form-control">
+        <option value="">{{ __('No Album') }}</option>
+        @foreach ($albums as $album)
+            <option value="{{ $album->id }}"
+                {{ (isset($song) && $song->album_id == $album->id) || old('album_id') == $album->id ? 'selected' : '' }}>
+                {{ $album->album_name }}
+            </option>
+        @endforeach
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="music_style_id">{{ __('Music Style') }}:</label>
+    <select name="music_style_id" id="music_style_id" class="form-control">
+        <option value="">{{ __('Free Style') }}</option>
+        @foreach ($musicStyles as $musicStyle)
+            <option value="{{ $musicStyle->id }}"
+                {{ (isset($song) && $song->music_style_id == $musicStyle->id) || old('music_style_id') == $musicStyle->id ? 'selected' : '' }}>
+                {{ $musicStyle->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
         
         <div class="form-group">
             <label for="year">{{ __('Year') }}:</label>

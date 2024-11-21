@@ -23,39 +23,33 @@ class SongController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required',
-            'artist' => 'required',
-            'album' => 'required',
-            'year' => 'required|integer',
-            'image' => 'nullable|image',
-            'music_file' => 'nullable|mimes:mp3',
-            'music_style_id' => 'nullable|exists:music_styles,id',
-        ]);
-    
-        
-        $data = $request->all();
-        $data['user_id'] = auth()->id(); 
-    
+{
+    $request->validate([
+        'title' => 'required',
+        'artist' => 'required',
+        'album_id' => 'nullable|exists:albums,id', // Đảm bảo tên trường là album_id
+        'year' => 'required|integer',
+        'image' => 'nullable|image',
+        'music_file' => 'nullable|mimes:mp3',
+        'music_style_id' => 'nullable|exists:music_styles,id',
+    ]);
 
-        $data['music_style_id'] = $data['music_style_id'] ?? MusicStyle::where('name', 'Crossovver')->first()->id;
-    
-       
-        if ($request->hasFile('image')) {
-            $data['image'] = $this->uploadFile($request->file('image'), 'users/songs/images');
-        }
-    
+    $data = $request->all();
+    $data['user_id'] = auth()->id();
 
-        if ($request->hasFile('music_file')) {
-            $data['music_file'] = $this->uploadFile($request->file('music_file'), 'users/songs/mp3');
-        }
-    
-
-        Song::create($data);
-    
-        return redirect()->route('songs.index')->with('success', 'Song added successfully.');
+    if ($request->hasFile('image')) {
+        $data['image'] = $this->uploadFile($request->file('image'), 'users/songs/images');
     }
+
+    if ($request->hasFile('music_file')) {
+        $data['music_file'] = $this->uploadFile($request->file('music_file'), 'users/songs/mp3');
+    }
+
+    Song::create($data);
+
+    return redirect()->route('songs.index')->with('success', __('Song added successfully.'));
+}
+
     
 
     public function show(Song $song)
@@ -72,30 +66,31 @@ class SongController extends Controller
 
 
     public function update(Request $request, Song $song)
-    {
-        $request->validate([
-            'title' => 'required',
-            'artist' => 'required',
-            'album_id' => 'nullable|exists:albums,id', 
-            'year' => 'required|integer',
-            'image' => 'nullable|image',
-            'music_file' => 'nullable|mimes:mp3',
-        ]);
+{
+    $request->validate([
+        'title' => 'required',
+        'artist' => 'required',
+        'album_id' => 'nullable|exists:albums,id', // Đảm bảo tên trường là album_id
+        'year' => 'required|integer',
+        'image' => 'nullable|image',
+        'music_file' => 'nullable|mimes:mp3',
+        'music_style_id' => 'nullable|exists:music_styles,id',
+    ]);
 
-        $data = $request->all();
-
-        
-        if ($request->hasFile('image')) {
-            $data['image'] = $this->uploadFile($request->file('image'), 'users/songs/images');
-        }
-
-        if ($request->hasFile('music_file')) {
-            $data['music_file'] = $this->uploadFile($request->file('music_file'), 'users/songs/mp3');
-        }
-
-        $song->update($data);
-        return redirect()->route('songs.index')->with('success', 'Song updated successfully.');
+    $data = $request->all();
+   
+    if ($request->hasFile('image')) {
+        $data['image'] = $this->uploadFile($request->file('image'), 'users/songs/images');
     }
+
+    if ($request->hasFile('music_file')) {
+        $data['music_file'] = $this->uploadFile($request->file('music_file'), 'users/songs/mp3');
+    }
+
+    $song->update($data);
+
+    return redirect()->route('songs.index')->with('success', __('Song updated successfully.'));
+}
 
 
     public function destroy(Song $song)
