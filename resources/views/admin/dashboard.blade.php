@@ -24,6 +24,11 @@
             <p>{{ __('Customize music styles and genres.') }}</p>
             <a href="{{ route('music_styles.index') }}" class="button">{{ __('View Styles') }}</a>
         </div>
+        <div class="card">
+            <h2>{{ __('Manage Users') }}</h2>
+            <p>{{ __('Add, edit, and manage registered users.') }}</p>
+            <a href="{{ route('users.index') }}" class="button">{{ __('View Users') }}</a>
+        </div>
     </div>
 </div>
 @endsection
