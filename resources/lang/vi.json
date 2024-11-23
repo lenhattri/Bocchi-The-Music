@@ -761,7 +761,7 @@
     "Admin Dashboard": "Bảng Điều Khiển Quản Trị",
     "Welcome to admin dashboard.": "Chào mừng bạn đến với bảng điều khiển admin :3",
     "Manage Songs": "Quản Lý Bài Hát",
-    "Add, edit, and remove songs from your music library.": "Thêm, chỉnh sửa và xóa bài hát trong thư viện nhạc của bạn.",
+    "Add, edit, and remove songs from music library.": "Thêm, chỉnh sửa và xóa bài hát trong thư viện nhạc",
     "View Songs": "Xem Bài Hát",
     "Manage Albums": "Quản Lý Album",
     "Organize your albums and create collections.": "Sắp xếp album và tạo bộ sưu tập.",
@@ -780,7 +780,6 @@
     "Add User": "Thêm Người Dùng",
     "Edit User": "Chỉnh Sửa Người Dùng",
     "User Details": "Chi Tiết Người Dùng",
-    
     "Admin": "Quản Trị",
     "Yes": "Có",
     "Create User": "Tạo Người Dùng",

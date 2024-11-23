@@ -10,12 +10,8 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\UserController;
 
 
-
-
-
 //API
 Route::post('/songs/{songId}/listen', [HistoryController::class, 'recordListening'])->middleware('auth');
-
 
 
 //Views Routes

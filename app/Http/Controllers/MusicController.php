@@ -11,23 +11,41 @@ class MusicController extends Controller
     {
         $userId = auth()->id();
 
+        $currentSong = Song::findOrFail($id);
+        $currentSong->increment('plays'); 
+
+    
+        if (auth()->check()) {
+            $userId = auth()->id();
+            $history = History::where('user_id', $userId)->where('song_id', $currentSong->id)->first();
+            if ($history) {
+                $history->increment('listen_count');
+            } else {
+                History::create([
+                    'user_id' => $userId,
+                    'song_id' => $currentSong->id,
+                ]);
+            }
+        }
         if (!$userId) {
             return redirect()->route('login')->with('error', __('Please login to view this song.'));
         }
 
-        // Lấy bài hát hiện tại
+        
         $currentSong = Song::with(['album', 'musicStyle'])->findOrFail($id);
 
-        // Lấy lịch sử nghe của người dùng
+        
         $histories = History::where('user_id', $userId)->get();
 
-        // Tính toán tổng số lần nghe
-        $totalGenrePlays = $histories->groupBy('song.musicStyle.id')->map->sum('listen_count');
-        $totalAlbumPlays = $histories->groupBy('song.album.id')->map->sum('listen_count');
-        $totalArtistPlays = $histories->groupBy('song.artist')->map->sum('listen_count');
+        $totalGenrePlays = $histories->groupBy(fn ($history) => $history->song->musicStyle->id ?? 'null')
+            ->map->sum('listen_count');
+        $totalAlbumPlays = $histories->groupBy(fn ($history) => $history->song->album->id ?? 'null')
+            ->map->sum('listen_count');
+        $totalArtistPlays = $histories->groupBy(fn ($history) => $history->song->artist ?? 'null')
+            ->map->sum('listen_count');
         $maxSongPlays = $histories->max('listen_count');
 
-        // Định nghĩa các trọng số
+     
         $weights = [
             'genre' => 0.25,
             'album' => 0.20,
@@ -36,21 +54,30 @@ class MusicController extends Controller
             'recency' => 0.15,
         ];
 
-        // Lọc các bài hát khác để gợi ý
+       
         $songs = Song::where('id', '!=', $id)->with(['album', 'musicStyle'])->get();
 
-        // Tính điểm cho từng bài hát
-        $songScores = $songs->map(function ($song) use ($histories, $totalGenrePlays, $totalAlbumPlays, $totalArtistPlays, $maxSongPlays, $weights) {
+    
+        $songScores = $songs->map(function ($song) use (
+            $histories,
+            $totalGenrePlays,
+            $totalAlbumPlays,
+            $totalArtistPlays,
+            $maxSongPlays,
+            $weights
+        ) {
             $userHistory = $histories->where('song_id', $song->id)->first();
             $lastPlayedDays = $userHistory ? now()->diffInDays($userHistory->updated_at) : null;
 
             // Tính các thành phần điểm
-            $genreScore = $song->musicStyle
-                ? ($totalGenrePlays[$song->musicStyle->id] ?? 0) / max(1, $totalGenrePlays->sum())
+            $genreKey = $song->musicStyle->id ?? 'null';
+            $genreScore = $totalGenrePlays->has($genreKey)
+                ? $totalGenrePlays[$genreKey] / max(1, $totalGenrePlays->sum())
                 : 0;
 
-            $albumScore = $song->album
-                ? ($totalAlbumPlays[$song->album->id] ?? 0) / max(1, $totalAlbumPlays->sum())
+            $albumKey = $song->album->id ?? 'null';
+            $albumScore = $totalAlbumPlays->has($albumKey)
+                ? $totalAlbumPlays[$albumKey] / max(1, $totalAlbumPlays->sum())
                 : 0;
 
             $artistScore = $song->artist
@@ -78,7 +105,6 @@ class MusicController extends Controller
             ];
         });
 
-      
         $topSongs = $songScores->sortByDesc('score')->take(5);
 
         return view('music.show', [

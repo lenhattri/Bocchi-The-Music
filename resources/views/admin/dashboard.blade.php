@@ -11,7 +11,7 @@
     <div class="dashboard-content">
         <div class="card">
             <h2>{{ __('Manage Songs') }}</h2>
-            <p>{{ __('Add, edit, and remove songs from your music library.') }}</p>
+            <p>{{ __('Add, edit, and remove songs from music library.') }}</p>
             <a href="{{ route('songs.index') }}" class="button">{{ __('View Songs') }}</a>
         </div>
         <div class="card">
